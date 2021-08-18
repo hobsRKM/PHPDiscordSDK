@@ -1,0 +1,22 @@
+{
+    "name": "hobsrkm/phpdiscordsdk",
+    "description": "A Light Weight PHP Discord SDK Library to build Discord Bots with Web Panel",
+    "autoload": {
+        "psr-4": {
+            "HobsRkm\\SDK\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "react/socket": "^1.9",
+        "ratchet/pawl": "^0.3.5",
+        "react/event-loop": "^1.2",
+        "react/promise": "^2.8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.5.*",
+        "clue/block-react": "1.4",
+        "seregazhuk/react-promise-testing": "^0.6.1"
+    }
+}
