@@ -3,13 +3,16 @@
 namespace HobsRkm\SDK\PHPDiscordSDK;
 
 
+use Error;
 use HobsRkm\SDK\PHPDiscordSDK\Config\Config;
 use HobsRkm\SDK\PHPDiscordSDK\Constants\Constants;
+use HobsRkm\SDK\PHPDiscordSDK\Events\Timer;
 use HobsRkm\SDK\PHPDiscordSDK\Socket\Socket;
+use InvalidArgumentException;
 use React\Promise\Deferred;
 use React\Promise\Promise;
-
-require_once 'Constants/Constants.php';
+use HobsRkm\SDK\PHPDiscordSDK\Utils\Console;
+use Throwable;
 
 /**
  * Class PHPDiscordSDKClient
@@ -42,6 +45,9 @@ class PHPDiscordSDKClient
     /**
      * PHPDiscordSDKClient constructor.
      */
+    private $_helper;
+    private $_timer;
+
     function __construct()
     {
 
@@ -49,14 +55,18 @@ class PHPDiscordSDKClient
         $this->_constants = new Constants();
         $this->_constants = $this->_constants->allConstants();
         $this->_config = new Config();
+        $this->_helper = new Console();
+        $this->_timer = new Timer();
     }
-
 
 
     /**
      * @param string $token
      * @return Promise
-     * @throws \Error
+     * @throws InvalidArgumentException
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 8/21/2021
+     * Time: 11:14 AM
      */
     public function botConnect(string $token): Promise
     {
@@ -70,45 +80,54 @@ class PHPDiscordSDKClient
                     $gatewayData = json_decode($msg, true);
                     if (array_key_exists('t', $gatewayData)) {
                         $this->_config->setToken($this->_token);
-                        $this->_config->getGateWayBody();
-                        $this->_socket->authenticateBot($this->_config->getGateWayBody())->then(
+                        $this->_socket->authenticateBot($this->_config->getGateWayHeartBeatBody())->then(
                             function ($msg) {
+
                                 $data = json_decode($msg, true);
                                 if (!empty($data) && $data['t'] == $this->_constants->READY) {
                                     $this->_deferred->resolve($this->_socket->socketStateListenerObj());
                                 } else {
-                                    $this->_deferred->resolve($this->_constants->errors->DISCORD_AUTH_ERROR);
+                                    $this->_timer->cancelTimer();
+                                    $this->_deferred->reject($this->_constants->errors->DISCORD_AUTH_ERROR);
                                 }
                             },
-                            function (\Throwable $reason) {
-                                $this->_deferred->resolve($this->_constants->errors->DISCORD_AUTH_ERROR.$reason);
+                            function (Throwable $reason) {
+                                $this->_deferred->reject($this->_constants->errors->DISCORD_AUTH_ERROR.$reason);
                             }
                         );
                     } else {
-                        throw new \Error($this->_constants->errors->DISCORD_ERROR);
+                        //if gateway response is incorrect, on bootstrap
+                        $this->_timer->cancelTimer();
+                        throw new Error($this->_constants->errors->DISCORD_ERROR);
                     }
                 },
-                function (\Throwable $reason) {
-                    throw new \Error($reason);
+                function (Throwable $reason) {
+                    //If gateway socket error has occurred
+                    $this->_timer->cancelTimer();
+                    Console::printMessage($reason->getMessage());
                 }
             );
 
         } else {
-            throw new \Error($this->_constants->errors->TOKEN_EMPTY);
+            throw new InvalidArgumentException($this->_constants->errors->TOKEN_EMPTY);
         }
         return $this->_deferred->promise();
     }
 
+
     /**
      * @param $event
      * @return Promise
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 8/21/2021
+     * Time: 11:13 AM
      */
     public function formatEvent($event): Promise {
         $this->_deferred = new Deferred();
         $message = json_decode($event, true);
         if(isset($message) && $message['op'] != $this->_constants->H_CODE && !empty($message['t'])) {
-            if(isset($message['d']['name']) && $message['t'] == 'GUILD_CREATE') {
-                $this->printConsoleMessage("The bot is online on ".$message['d']['name']);
+            if(isset($message['d']['name']) && $message['t'] == $this->_constants->GUILD_CREATE) {
+                Console::printMessage($this->_constants->messages->READY.$message['d']['name']);
             }
             $this->_deferred->resolve($message);
         }
@@ -116,9 +135,6 @@ class PHPDiscordSDKClient
         return $this->_deferred->promise();
     }
 
-    private function printConsoleMessage($message)
-    {
-        echo $message;
-    }
+
 }
 

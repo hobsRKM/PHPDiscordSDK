@@ -14,21 +14,32 @@ class Config
     /**
      * @var
      */
-    private static $_token;
+    public static $_token = null;
 
     /**
      * @var object
      */
     private $_constants;
+    /**
+     * @var string
+     */
+    private $_settings;
 
+    /**
+     * Config constructor.
+     */
     function __construct()
     {
         $this->_constants = new Constants();
         $this->_constants = $this->_constants->allConstants();
+        $this->_settings = dirname(__DIR__, 1) . "/settings.ini";
     }
+
 
     /**
      * @return array
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 8/21/2021
      */
     function getGateWayBody(): array
     {
@@ -46,8 +57,11 @@ class Config
         );
     }
 
+
     /**
-     * @return array
+     * @return int[]
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 8/21/2021
      */
     function getGateWayHeartBeatBody(): array
     {
@@ -57,12 +71,53 @@ class Config
         );
     }
 
+
     /**
      * @param string $token
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 8/21/2021
      */
     function setToken(string $token)
     {
         self::$_token = $token;
+        $this->saveToken();
+    }
+
+    /**
+     * @return string
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 8/21/2021
+     */
+    public function getToken(): string
+    {
+        $data = parse_ini_file($this->_settings);
+        return isset($data['token'])?$data['token']:"";
+    }
+
+    /**
+     * Save the token for HTTP Requests,
+     * especially if the requests are sent outside of socket listener
+     *
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 8/21/2021
+     */
+    private function saveToken()
+    {
+
+        $fp = fopen($this->_settings,"w");
+        ftruncate($fp, 0);
+        fwrite($fp, "token=".self::$_token);
+        fclose($fp);
+    }
+
+    /**
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 8/21/2021
+     */
+    public function clearToken() {
+        $fp = fopen($this->_settings,"w");
+        ftruncate($fp, 0);
+        fclose($fp);
     }
 
 

@@ -1,3 +1,4 @@
 /vendor
 /tests
 /test.php
+/src/PHPDiscordSDK/settings.ini
