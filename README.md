@@ -48,8 +48,8 @@ PHPDiscordSDKFactory::getInstance()
 		   $bot->on('message', function ($event) {
 			PHPDiscordSDKFactory::getInstance()
 			->formatEvent($event)->then(function($message){
-			//Bot Event Listener
-			//call other APIs
+				//Bot Event Listener
+				//call other APIs
 				print_r($message);//prints server details
 			}, function ($reason) {
 				//message event errors
