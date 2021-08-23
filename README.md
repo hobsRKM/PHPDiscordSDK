@@ -45,15 +45,15 @@ PHPDiscordSDKFactory::getInstance()
 	->botConnect("<<<<BOT TOKEN><<<<")
 	->then(
 		function ($bot) {
-		    $bot->on('message', function ($event) {
-               PHPDiscordSDKFactory::getInstance()
-               ->formatEvent($event)->then(function($message){
-                   //Bot Event Listener
-                   //call other APIs
-                       print_r($message);//prints server details
-                }, function ($reason) {
-                   //message event errors
-               });
+			$bot->on('message', function ($event) {
+				PHPDiscordSDKFactory::getInstance()
+				->formatEvent($event)->then(function($message){
+				//Bot Event Listener
+				//call other APIs
+					print_r($message);//prints server details
+				}, function ($reason) {
+				//message event errors
+			});
 		});
 	},
 	function ($reason) {
@@ -62,4 +62,6 @@ PHPDiscordSDKFactory::getInstance()
 );
 ````
 ![bot.php](https://web.inmelodies.in/wp-content/uploads/2021/08/Screenshot_2.png)
+
+
 
