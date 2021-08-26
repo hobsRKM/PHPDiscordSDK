@@ -3,6 +3,7 @@
 namespace HobsRkm\SDK\PHPDiscordSDK\Socket;
 
 use ErrorException;
+use HobsRkm\SDK\PHPDiscordSDK\Config\Config;
 use HobsRkm\SDK\PHPDiscordSDK\Constants\Constants;
 use HobsRkm\SDK\PHPDiscordSDK\Events\Timer;
 use HobsRkm\SDK\PHPDiscordSDK\Utils\Console;
@@ -16,11 +17,11 @@ class Socket
     /**
      * @var object
      */
-    private $_constants;
+    public $_constants;
     /**
      * @var null
      */
-    public  static $_socketState;
+    public static $_socketState;
     /**
      * @var
      */
@@ -37,6 +38,10 @@ class Socket
      * @var Console
      */
     private $_helper;
+    /**
+     * @var Config
+     */
+    private $_config;
 
     /**
      * Socket constructor.
@@ -44,10 +49,10 @@ class Socket
     function __construct()
     {
         $this->_constants = new Constants();
-        $this->_constants =  $this->_constants->allConstants();
+        $this->_constants = $this->_constants->allConstants();
         $this->_timer = new Timer();
-        self::$_socketState = null;
         $this->_helper = new Console();
+        $this->_config = new Config();
     }
 
 
@@ -59,12 +64,11 @@ class Socket
     public function connectWS(): Promise
     {
         $this->deferred = new Deferred();
-        connect($this->_constants->WS)->then(function ($conn)  {
+        connect($this->_constants->WS)->then(function ($conn) {
             self::$_socketState = $conn;
-          
-           $this->socketMessageEventReceiver();
-           $this->socketCloseEventReceiver();
-           
+            $this->socketMessageEventReceiver();
+            $this->socketCloseEventReceiver();
+
         }, function ($e) {
             $this->deferred->reject($e);
         });
@@ -77,7 +81,8 @@ class Socket
      * @author: Yuvaraj Mudaliar ( @HobsRKM )
      * Date: 8/21/2021
      */
-    public function authenticateBot(Array $body): Promise {
+    public function authenticateBot(array $body): Promise
+    {
         $this->deferred = new Deferred();
         try {
             self::$_socketState->send(json_encode($body));
@@ -92,15 +97,16 @@ class Socket
      * @author: Yuvaraj Mudaliar ( @HobsRKM )
      * Date: 8/21/2021
      */
-    private function socketMessageEventReceiver() {
+    private function socketMessageEventReceiver()
+    {
         self::$_socketState->on('message', function ($msg) {
-            if(!$this->_timer->isTimerSet()) {
+            if (!$this->_timer->isTimerSet()) {
                 $this->_timer->startHeartBeat(self::$_socketState);
             }
             //if a promise to resolve, resolve it , else do nothing
             // required only during bootstrap and authentication for first time
             $this->deferred->resolve($msg);
-          
+
         });
     }
 
@@ -109,19 +115,20 @@ class Socket
      * @author: Yuvaraj Mudaliar ( @HobsRKM )
      * Date: 8/21/2021
      */
-    private function socketCloseEventReceiver() {
+    private function socketCloseEventReceiver()
+    {
         self::$_socketState->on('close', function ($code = null, $reason = null) {
             $this->_connectionError = array(
-                "code" =>$code,
+                "code" => $code,
                 "reason" => $reason
             );
             //re connect try
-            if($code == $this->_constants->SOCKET_DC_CODE) {
-                $this->connectWS()->then(function(){
+            if ($code == $this->_constants->SOCKET_DC_CODE) {
+                $this->connectWS()->then(function () {
                     //DO NOTHING
-                },function(Throwable $reason){
-                   Console::printMessage($reason->getMessage());
-                   $this->_timer->cancelTimer();
+                }, function (Throwable $reason) {
+                    Console::printMessage($reason->getMessage());
+                    $this->_timer->cancelTimer();
                 });
             }
         });
@@ -133,8 +140,18 @@ class Socket
      * @author: Yuvaraj Mudaliar ( @HobsRKM )
      * Date: 8/21/2021
      */
-    public function socketStateListenerObj() {
+    public function socketStateListenerObj()
+    {
         return self::$_socketState;
     }
 
+
+    /**
+     * Emit Gateway events
+     * @param array $data
+     */
+    public function emitEvent(array $data)
+    {
+        self::$_socketState->send(json_encode($data));
+    }
 }

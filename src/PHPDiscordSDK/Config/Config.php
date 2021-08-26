@@ -44,7 +44,7 @@ class Config
     function getGateWayBody(): array
     {
         return array(
-            "op" => 2,
+            "op" => $this->_constants->OP_CODES->IDENTIFY,
             "d" => array(
                 "heartbeat_interval" => $this->_constants->HEART_BEAT_INTERVAL,
                 "token" => self::$_token,
@@ -52,8 +52,9 @@ class Config
                     '$os' => $this->_constants->OS,
                     '$browser' => $this->_constants->BROWSER,
                     '$device' => $this->_constants->DEVICE
-                )
-            )
+                ),
+
+            ),
         );
     }
 
@@ -66,7 +67,7 @@ class Config
     function getGateWayHeartBeatBody(): array
     {
         return array(
-            "op" => 1,
+            "op" => $this->_constants->OP_CODES->HEARTBEAT,
             "d" => 251
         );
     }

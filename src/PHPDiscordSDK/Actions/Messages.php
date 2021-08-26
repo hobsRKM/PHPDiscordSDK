@@ -40,6 +40,13 @@ class Messages
         $this->_config = new Config();
     }
 
+    /**
+     * @requires SendMessage Permission on Discord
+     * @param array $data
+     * @return Promise
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 8/25/2021
+     */
     public function sendMessage(array $data): Promise
     {
         $this->_deferred = new Deferred();

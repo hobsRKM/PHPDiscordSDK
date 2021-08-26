@@ -2,6 +2,11 @@
 
 namespace HobsRkm\SDK\PHPDiscordSDK;
 
+
+use HobsRkm\SDK\PHPDiscordSDK\Actions\Channels;
+use HobsRkm\SDK\PHPDiscordSDK\Actions\Messages;
+use HobsRkm\SDK\PHPDiscordSDK\Actions\Presence;
+
 /**
  * Class PHPDiscordSDKFactory
  * @package HobsRkm\SDK\PHPDiscordSDK
@@ -18,12 +23,29 @@ class PHPDiscordSDKFactory
     }
 
     /**
-     * @return PHPDiscordSDKClient
+     * @param string|null $instanceType
+     * @return PHPDiscordSDKClient| Messages | Presence | Channels
      */
-    public static function getInstance(): PHPDiscordSDKClient
+    public static function getInstance(string $instanceType=null)
     {
-        return new PHPDiscordSDKClient();
+        switch($instanceType){
+            case "Messages":
+                $instance = new Messages();
+                break;
+            case "Presence":
+                $instance =  new Presence();
+                break;
+            case "Channels":
+                $instance =  new Channels();
+                break;
+            default:
+                $instance =  new PHPDiscordSDKClient();
+        }
+        return $instance;
+
     }
+
+
 
 }
 

@@ -80,7 +80,7 @@ class PHPDiscordSDKClient
                     $gatewayData = json_decode($msg, true);
                     if (array_key_exists('t', $gatewayData)) {
                         $this->_config->setToken($this->_token);
-                        $this->_socket->authenticateBot($this->_config->getGateWayHeartBeatBody())->then(
+                        $this->_socket->authenticateBot($this->_config->getGateWayBody())->then(
                             function ($msg) {
 
                                 $data = json_decode($msg, true);
@@ -125,7 +125,7 @@ class PHPDiscordSDKClient
     public function formatEvent($event): Promise {
         $this->_deferred = new Deferred();
         $message = json_decode($event, true);
-        if(isset($message) && $message['op'] != $this->_constants->H_CODE && !empty($message['t'])) {
+        if(isset($message) && $message['op'] != $this->_constants->OP_CODES->H_CODE && !empty($message['t']) && $message['t']!==$this->_constants->PRESENCE_UPDATE) {
             if(isset($message['d']['name']) && $message['t'] == $this->_constants->GUILD_CREATE) {
                 Console::printMessage($this->_constants->messages->READY.$message['d']['name']);
             }
@@ -134,6 +134,9 @@ class PHPDiscordSDKClient
 
         return $this->_deferred->promise();
     }
+
+
+
 
 
 }
