@@ -10,6 +10,7 @@ use HobsRkm\SDK\PHPDiscordSDK\Config\Config;
 use HobsRkm\SDK\PHPDiscordSDK\Constants\Constants;
 use HobsRkm\SDK\PHPDiscordSDK\Helpers\Rest;
 
+use Psr\Http\Message\ResponseInterface;
 use React\Http\Browser;
 use React\Promise\Deferred;
 use React\Promise\Promise;
