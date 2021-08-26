@@ -70,7 +70,7 @@ class Constants
             "CHANNEL"=>(object)array(
                 "CHANNEL_MESSAGE" => "/channels/:channel_id:/messages",
                 "CHANNEL_DETAILS" => "/channels/:channel_id:",
-                "CHANNEL_MESSAGE_DETAILS"=>"/channels/:channel_id:/messages/:message_id:"
+                "CHANNEL_MESSAGE_DETAILS"=>"/channels/:channel_id:/messages/:message_id:",
             )
         );
     }
