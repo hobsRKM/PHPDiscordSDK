@@ -20,7 +20,7 @@ A DiscordSDK  to build Discord Bots using PHP, with Web Panel.
 - Requires **PHP >=7.0**
 
 ````
-composer require hobsrkm/phpdiscordsdk
+composer require phpdiscordsdk/phpdiscordsdk
 ````
 ### Getting Started
 
