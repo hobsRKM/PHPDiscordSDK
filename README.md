@@ -321,3 +321,10 @@ PHPDiscordSDKFactory::getInstance()
 );
 
 ````
+### Web Panel
+Coming Soon - Under Development
+
+> Project is Open for contributions , please feel free to fork
+
+
+&copy;MIT License
