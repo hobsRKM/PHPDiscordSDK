@@ -1,6 +1,7 @@
 {
     "name": "hobsrkm/phpdiscordsdk",
     "description": "A Light Weight PHP Discord SDK Library to build Discord Bots with Web Panel",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "HobsRkm\\SDK\\": "src/"
