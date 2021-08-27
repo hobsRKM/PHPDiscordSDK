@@ -42,6 +42,13 @@ class Constants
             "GUILD_CREATE" => "GUILD_CREATE",
             "PRESENCE_UPDATE" => "PRESENCE_UPDATE",
             "SINCE"=>91879201,
+            "PRESENCE_CODE"=>array(
+              "PLAYING"=>0,
+              "STREAMING"=>1,
+              "WATCHING"=>3,
+              "LISTENING"=>2,
+              "COMPETING"=>5
+            ),
             "OP_CODES" => (object)array(
                 "H_CODE" => 11,
                 "IDENTIFY" => 2,
