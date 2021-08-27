@@ -4,7 +4,7 @@ A Light Weight PHP Discord SDK Library to build Discord Bots with Web Panel
 
 ## PHPDiscordSDK
 A DiscordSDK  to build Discord Bots using PHP, with Web Panel.
-1. [Installation](Installation)
+1. [Installation](#Installation)
 2. [Getting Started](Getting_Started)
 3. [Listening to Bot Events](bot_events)
 4. [APIs](APIs)
