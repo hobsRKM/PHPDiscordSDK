@@ -332,5 +332,10 @@ Coming Soon - Under Development
 
 > Project is Open for contributions , please feel free to fork
 
+**Contribution Guide**
+
+- All Pull requests should be from a Local Branch of Develop
+- Be sure to checkout Develop Branch
+- Any other pull requests to master  or other branches will be rejected
 
 &copy;MIT License
