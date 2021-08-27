@@ -1,4 +1,4 @@
-[![build](https://github.com/hobsRKM/PHPDiscordSDK/actions/workflows/php.yml/badge.svg?branch=master)](https://github.com/hobsRKM/PHPDiscordSDK/actions/workflows/php.yml) [![Codacy Security Scan](https://github.com/hobsRKM/PHPDiscordSDK/actions/workflows/codacy-analysis.yml/badge.svg?branch=master)](https://github.com/hobsRKM/PHPDiscordSDK/actions/workflows/codacy-analysis.yml)
+[![build](https://github.com/hobsRKM/PHPDiscordSDK/actions/workflows/php.yml/badge.svg?branch=master)](https://github.com/hobsRKM/PHPDiscordSDK/actions/workflows/php.yml)  [![Codacy Security Scan](https://github.com/hobsRKM/PHPDiscordSDK/actions/workflows/codacy-analysis.yml/badge.svg?branch=master)](https://github.com/hobsRKM/PHPDiscordSDK/actions/workflows/codacy-analysis.yml)
 
 # PHPDiscordSDK
 A Light Weight PHP Discord SDK Library to build Discord Bots with Web Panel
