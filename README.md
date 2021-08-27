@@ -335,7 +335,7 @@ Coming Soon - Under Development
 **Contribution Guide**
 
 - All Pull requests should be from a Local Branch of Develop
-- Be sure to checkout Develop Branch
+- Be sure to check out Develop Branch
 - Any other pull requests to master  or other branches will be rejected
 
 &copy;MIT License
