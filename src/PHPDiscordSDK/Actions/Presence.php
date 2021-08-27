@@ -29,9 +29,11 @@ class Presence
 
     public function setActivity(array $body)
     {
+
         if (array_key_exists("activity", $body) &&
             array_key_exists("status", $body) &&
-            array_key_exists("type", $body)) {
+            array_key_exists("type", $body) &&
+            in_array($body['type'],array_flip($this->_constants->PRESENCE_CODE))) {
             $data = $this->prepareActivity($body);
             $this->_socket->emitEvent($data);
         } else {
