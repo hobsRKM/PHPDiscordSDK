@@ -24,7 +24,7 @@ composer require phpdiscordsdk/phpdiscordsdk
 ````
 ### Getting Started
 
-> To start the bot you need to start it using **CLI (Command Line)**
+> To start the bot you need to start it using **CLI ( Command Line )**
 >
 > Once the bot is up and running, you can start using the [APIs](apis)
 >
