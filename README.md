@@ -161,6 +161,12 @@ The following APIs cannot be called outside of Listener
 
 # APIs
 
+> The bot should have necessary Permissions on Discord Server
+>
+> Ex: Send message requires Send Message Perms on a channel
+>
+> For more information on specific permission, check the response body on each APIs.
+
 ### SendMessage
 
 ````php
