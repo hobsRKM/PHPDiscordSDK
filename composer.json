@@ -2,6 +2,14 @@
     "name": "phpdiscordsdk/phpdiscordsdk",
     "description": "A Light Weight PHP Discord SDK Library to build Discord Bots with Web Panel",
     "license": "MIT",
+    "keywords": ["phpdiscord", "phpdiscordsdk", "php discord bot"],
+    "authors": [
+        {
+            "name": "Yuvaraj Mudaliar",
+            "homepage": "https://web.inmelodies.in",
+            "email": "yuvim86@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "HobsRkm\\SDK\\": "src/"
