@@ -14,7 +14,10 @@ A DiscordSDK  to build Discord Bots using PHP, with Web Panel.
    3. [UpdateChannelDetails](#UpdateChannelDetails)
    4. [DeletChannel](#DeletChannel)
    5. [Activity](#Presence)
-   6. More coming soon....
+   6. Visit  documentation site for complete list
+
+####  Documentation
+**[Complete Docs of PHPDiscordSDK](https://phpdiscordsdk.gitbook.io/)**
 
 ### Installation
 
