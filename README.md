@@ -331,6 +331,9 @@ PHPDiscordSDKFactory::getInstance()
 );
 
 ````
+####  Documentation
+**[Complete Docs of PHPDiscordSDK](https://phpdiscordsdk.gitbook.io/)**
+
 ### Web Panel
 Coming Soon - Under Development
 
