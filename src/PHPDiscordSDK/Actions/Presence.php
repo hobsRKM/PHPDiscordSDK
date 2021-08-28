@@ -51,7 +51,7 @@ class Presence
                 "activities" => array(
                     array(
                         "name" => $body['activity'],
-                        "type" => $body['type']
+                        "type" => $this->_constants->PRESENCE_CODE[$body['type']]
                     )
                 ),
                 "status" => $body['status'],

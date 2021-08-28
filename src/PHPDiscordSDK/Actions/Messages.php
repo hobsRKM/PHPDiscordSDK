@@ -52,7 +52,30 @@ class Messages
     {
         $this->_deferred = new Deferred();
         $this->_client->post(
-            (new Rest)->formatURLParams("CHANNEL", $data),
+            $this->_helper->formatURLParams("CHANNEL", $data),
+            $this->_helper->headers(),
+            json_encode($data['body'])
+        )->then(function (ResponseInterface $response) {
+            $this->_deferred->resolve(json_decode((string)$response->getBody()));
+        }, function (Exception $e) {
+            $this->_deferred->reject($e->getMessage());
+
+        });
+        return $this->_deferred->promise();
+    }
+
+    /**
+     * @requires channel id and message id and manage Channel Permissions
+     * @param array $data
+     * @return Promise
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 8/27/2021
+     */
+    public function updateChannelMessage(array $data): Promise
+    {
+        $this->_deferred = new Deferred();
+        $this->_client->patch(
+            $this->_helper->formatURLParams("CHANNEL", $data),
             $this->_helper->headers(),
             json_encode($data['body'])
         )->then(function (ResponseInterface $response) {
