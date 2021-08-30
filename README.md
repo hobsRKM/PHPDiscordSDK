@@ -195,10 +195,7 @@ The following APIs cannot be called outside of Listener
 			//message event errors
 			print_r($error->getMessage());
 		});
-	}, function ($reason) {
-	//message event errors
-	});
-});
+	
 ````
 
 ### GetChannelDetails
@@ -223,10 +220,7 @@ The following APIs cannot be called outside of Listener
 			//message event errors
 			print_r($error->getMessage());
 		});
-	}, function ($reason) {
-	//message event errors
-	});
-});
+
 ````
 
 ### DeleteChannel
@@ -251,10 +245,7 @@ The following APIs cannot be called outside of Listener
 			//message event errors
 			print_r($error->getMessage());
 		});
-	}, function ($reason) {
-	//message event errors
-	});
-});
+
 ````
 
 ### UpdateChannelDetails
@@ -283,10 +274,7 @@ The following APIs cannot be called outside of Listener
 			//message event errors
 			print_r($error->getMessage());
 		});
-	}, function ($reason) {
-	//message event errors
-	});
-});
+
 ````
 
 ### Presence
@@ -303,32 +291,39 @@ use \HobsRkm\SDK\PHPDiscordSDK\PHPDiscordSDKFactory;
 use \HobsRkm\SDK\PHPDiscordSDK\Actions\Channels;
 
 PHPDiscordSDKFactory::getInstance()
-	->botConnect("<<<<BOT TOKEN><<<<")
-	->then(
-		function ($bot) {
-			$bot->on('message', function ($event) {
-				PHPDiscordSDKFactory::getInstance()
-				->formatEvent($event)->then(function($message){
-			/**
-			call Presence API
-			The change is not instant, discord has a delay to update your status not to often
-			status - dnd | offline |online | afk
-			type - one of PLAYING,STREAMING,
-			LISTENING,WATCHING,COMPETING
-			**/
-			PHPDiscordSDKFactory::getInstance('Presence')
-			->setActivity(
-				array(
-					"activity"=>"Playing CS:GO",
-					"status"=>"dnd",
-					"type"=>'PLAYING'
-					)
-				);
-		},
-		function ($reason) {
-		//other errors, bot startup, authentication
-		}
-);
+            ->botConnect("<<<<BOT TOKEN><<<<")
+            ->then( 
+                function ($bot) {
+                    $bot->on('message', function ($event) {
+                        PHPDiscordSDKFactory::getInstance()->formatEvent($event)->then(function($message){
+                         //All events sent from client will be available here, including the server details the bot is listening on
+                        /**
+                        call Presence API
+                        The change is not instant, discord has a delay to update your status not to often
+                        status - dnd | offline |online | afk
+                        type - one of PLAYING,STREAMING,
+                        LISTENING,WATCHING,COMPETING
+                        **/
+                        PHPDiscordSDKFactory::getInstance('Presence')
+                        ->setActivity(
+                            array(
+                                "activity"=>"Playing CS:GO",
+                                "status"=>"dnd",
+                                "type"=>'PLAYING'
+                                )
+                            );                        
+                        }, function ($reason) {
+                            //message event errors
+                            print_r($reason->getMessage());
+                            //echo $reason->getMessage();
+                        });
+                    });
+                },
+                function ($reason) {
+                    print_r($reason);
+                    //other errors, bot startup, authentication
+                }
+            );
 
 ````
 ####  Documentation
