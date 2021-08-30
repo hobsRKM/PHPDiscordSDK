@@ -80,7 +80,6 @@ PHPDiscordSDKFactory::getInstance()
 require('vendor/autoload.php');
 
 use \HobsRkm\SDK\PHPDiscordSDK\PHPDiscordSDKFactory;
-use \HobsRkm\SDK\PHPDiscordSDK\Actions\Channels;
 
 PHPDiscordSDKFactory::getInstance()
 	->botConnect("<<<<BOT TOKEN><<<<")
@@ -128,7 +127,6 @@ PHPDiscordSDKFactory::getInstance()
 require('vendor/autoload.php');
 
 use \HobsRkm\SDK\PHPDiscordSDK\PHPDiscordSDKFactory;
-use \HobsRkm\SDK\PHPDiscordSDK\Actions\Channels;
   
 /**
 Required Parameters
@@ -174,83 +172,99 @@ The following APIs cannot be called outside of Listener
 ### SendMessage
 
 ````php
-	/**
-	Required - Channel Id
-	Content - You message, embeds supported - see Example Folder	
-	**/
-	$body = array(
-	"TYPE"=>"CHANNEL_MESSAGE",
-	"body"=>array(
-		"channel_id"=><<YOUR CHANNEL ID>>>,
-		"content"=>"Test Message"
-		)
-	);
-	PHPDiscordSDKFactory::getInstance('Messages')
-		->sendMessage($body)
-		->then(function($data){
-			//Sent message details, including message id
-			print_r($data);
-		}, 
-		function ($error) {
-			//message event errors
-			print_r($error->getMessage());
-		});
+    require('vendor/autoload.php');
+
+    use \HobsRkm\SDK\PHPDiscordSDK\PHPDiscordSDKFactory;
+	
+    /**
+    Required - Channel Id
+    Content - You message, embeds supported - see Example Folder	
+    **/
+    $body = array(
+    "TYPE"=>"CHANNEL_MESSAGE",
+    "body"=>array(
+        "channel_id"=><<YOUR CHANNEL ID>>>,
+        "content"=>"Test Message"
+        )
+    );
+    PHPDiscordSDKFactory::getInstance('Messages')
+        ->sendMessage($body)
+        ->then(function($data){
+            //Sent message details, including message id
+            print_r($data);
+        }, 
+        function ($error) {
+            //message event errors
+            print_r($error->getMessage());
+        });
 	
 ````
 
 ### GetChannelDetails
 
 ````php
-	/**
-	Required - Channel Id
-	**/
-	$body = array(
-	"TYPE"=>"CHANNEL_DETAILS",
-	"body"=>array(
-		"channel_id"=><<YOUR CHANNEL ID>>>,
-		)
-	);
-	PHPDiscordSDKFactory::getInstance('Channels')
-		->getChannelDetails($body)
-		->then(function($data){
-			//channel details
-			print_r($data);
-		}, 
-		function ($error) {
-			//message event errors
-			print_r($error->getMessage());
-		});
+    require('vendor/autoload.php');
+
+    use \HobsRkm\SDK\PHPDiscordSDK\PHPDiscordSDKFactory;
+	
+    /**
+    Required - Channel Id
+    **/
+    $body = array(
+    "TYPE"=>"CHANNEL_DETAILS",
+    "body"=>array(
+        "channel_id"=><<YOUR CHANNEL ID>>>,
+        )
+    );
+    PHPDiscordSDKFactory::getInstance('Channels')
+        ->getChannelDetails($body)
+        ->then(function($data){
+            //channel details
+            print_r($data);
+        }, 
+        function ($error) {
+            //message event errors
+            print_r($error->getMessage());
+        });
 
 ````
 
 ### DeleteChannel
 
 ````php
-	/**
-	Required - Channel Id
-	**/
-	$body = array(
-	"TYPE"=>"CHANNEL_DETAILS",
-	"body"=>array(
-		"channel_id"=><<YOUR CHANNEL ID>>>,
-		)
-	);
-	PHPDiscordSDKFactory::getInstance('Channels')
-		->deleteChannel($body)
-		->then(function($data){
-			//channel details
-			print_r($data);
-		}, 
-		function ($error) {
-			//message event errors
-			print_r($error->getMessage());
-		});
+    require('vendor/autoload.php');
+
+    use \HobsRkm\SDK\PHPDiscordSDK\PHPDiscordSDKFactory;
+	
+    /**
+    Required - Channel Id
+    **/
+    $body = array(
+    "TYPE"=>"CHANNEL_DETAILS",
+    "body"=>array(
+        "channel_id"=><<YOUR CHANNEL ID>>>,
+        )
+    );
+    PHPDiscordSDKFactory::getInstance('Channels')
+        ->deleteChannel($body)
+        ->then(function($data){
+            //channel details
+            print_r($data);
+        }, 
+        function ($error) {
+            //message event errors
+            print_r($error->getMessage());
+        });
 
 ````
 
 ### UpdateChannelDetails
 
 ````php
+    require('vendor/autoload.php');
+
+    use \HobsRkm\SDK\PHPDiscordSDK\PHPDiscordSDKFactory;
+	
 	/**
 	Required - Channel Id
 	Name - New channel Name
@@ -288,7 +302,6 @@ The following APIs cannot be called outside of Listener
 require('vendor/autoload.php');
 
 use \HobsRkm\SDK\PHPDiscordSDK\PHPDiscordSDKFactory;
-use \HobsRkm\SDK\PHPDiscordSDK\Actions\Channels;
 
 PHPDiscordSDKFactory::getInstance()
             ->botConnect("<<<<BOT TOKEN><<<<")
