@@ -132,11 +132,11 @@ use \HobsRkm\SDK\PHPDiscordSDK\PHPDiscordSDKFactory;
 Required Parameters
 **/
 $body = array(
-		"TYPE"=>"CHANNEL_DETAILS",
-		"body"=>array(
-			"channel_id"=><<YOUR CHANNEL ID>>>,
-			)
-		);
+        "TYPE"=>"CHANNEL_DETAILS",
+        "body"=>array(
+            "channel_id"=><<YOUR CHANNEL ID>>>,
+            )
+        );
 
 PHPDiscordSDKFactory::getInstance('Channels')
 	->getChannelMessages($body)
