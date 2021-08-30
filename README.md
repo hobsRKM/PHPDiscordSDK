@@ -93,12 +93,12 @@ PHPDiscordSDKFactory::getInstance()
 				print_r($message);
 				/**call Message API**/
 				$body = array(
-						"TYPE"=>"CHANNEL_MESSAGE",
-						"body"=>array(
-							"channel_id"=><<YOUR CHANNEL ID>>>,
-							"content"=>"Test Message"
-							)
-						);
+                                        "TYPE"=>"CHANNEL_MESSAGE",
+                                        "body"=>array(
+                                            "channel_id"=><<YOUR CHANNEL ID>>>,
+                                            "content"=>"Test Message"
+                                            )
+                                        );
 				PHPDiscordSDKFactory::getInstance('Messages')
 					->sendMessage($body)
 					->then(function($data){
