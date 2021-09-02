@@ -122,6 +122,11 @@ class Socket
                 "code" => $code,
                 "reason" => $reason
             );
+            if($code==$this->_constants->SOCKET_AUTH_ERROR){
+                Console::printMessage($reason);
+                $this->_timer->cancelTimer();
+                die();
+            }
             //re connect try
             if ($code == $this->_constants->SOCKET_DC_CODE) {
                 $this->connectWS()->then(function () {

@@ -39,6 +39,7 @@ class Constants
             ),
             "READY" => "READY",
             "SOCKET_DC_CODE" => 1001,
+            "SOCKET_AUTH_ERROR" => 4004,
             "GUILD_CREATE" => "GUILD_CREATE",
             "PRESENCE_UPDATE" => "PRESENCE_UPDATE",
             "SINCE" => 91879201,
