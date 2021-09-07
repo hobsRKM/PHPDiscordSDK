@@ -102,7 +102,7 @@ class Config
      * @author: Yuvaraj Mudaliar ( @HobsRKM )
      * Date: 8/21/2021
      */
-    private function saveToken()
+    public function saveToken()
     {
 
         $fp = fopen($this->_settings,"w");
