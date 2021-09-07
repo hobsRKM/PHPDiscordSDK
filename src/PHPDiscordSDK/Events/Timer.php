@@ -74,7 +74,7 @@ class Timer {
         {
             Console::printMessage($this->_constants->errors->NETWORK_TIMEOUT);
             $this->cancelTimer();
-
+            die();
         }
     }
 
