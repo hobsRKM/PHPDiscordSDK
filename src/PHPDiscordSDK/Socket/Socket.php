@@ -128,9 +128,9 @@ class Socket
                 die();
             }
             //re connect try
-            if ($code == $this->_constants->SOCKET_DC_CODE) {
+            if ($code == $this->_constants->SOCKET_DC_CODE || $code == $this->_constants->SOCKET_DC_SESSION_CODE) {
                 $this->connectWS()->then(function () {
-                    //DO NOTHING
+                    $this->authenticateBot($this->_config->getGateWayBody());
                 }, function (Throwable $reason) {
                     Console::printMessage($reason->getMessage());
                     $this->_timer->cancelTimer();
