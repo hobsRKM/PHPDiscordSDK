@@ -48,7 +48,7 @@ class Timer {
     public function startHeartBeat($socketState)
     {
         $this->_socketState = $socketState;
-        self::$_timer= Loop::addPeriodicTimer(5, function () {
+        self::$_timer= Loop::addPeriodicTimer( $this->_constants->LOOP_TIMER, function () {
             $this->_socketState->send(json_encode($this->_config->getGateWayHeartBeatBody()));
             $this->networkPing();
         });
