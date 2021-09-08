@@ -20,7 +20,8 @@ class Constants
     public function allConstants()
     {
         return (object)array(
-            'HEART_BEAT_INTERVAL' => '60000',
+            'HEART_BEAT_INTERVAL' => '45000',
+            "LOOP_TIMER" => '46',
             'OS' => 'windows',
             'WS' => 'wss://gateway.discord.gg/',
             'BROWSER' => 'disco',
