@@ -50,25 +50,36 @@ require('vendor/autoload.php');
 
 use \HobsRkm\SDK\PHPDiscordSDK\PHPDiscordSDKFactory;
 
-PHPDiscordSDKFactory::getInstance()
-	->botConnect("<<<<BOT TOKEN><<<<")
-	->then(
-		function ($bot) {
-			$bot->on('message', function ($event) {
-				PHPDiscordSDKFactory::getInstance()
-				->formatEvent($event)->then(function($message){
-				//Bot Event Listener
-				//call other APIs
-					print_r($message);//prints server details
-				}, function ($reason) {
-				//message event errors
-			});
-		});
-	},
-	function ($reason) {
-	//other errors, bot startup, authentication
-	}
-);
+class Bot {
+
+    public function start($token) {
+        PHPDiscordSDKFactory::getInstance()
+            ->botConnect($token)
+            ->then(
+                function ($bot) {
+                    $bot->on('message', function ($event) {
+                        PHPDiscordSDKFactory::getInstance()
+                        ->formatEvent($event)->then(function($message){
+                        //Bot Event Listener
+                        //call other APIs
+                            print_r($message);//prints server details
+                        }, function ($reason) {
+                        //message event errors
+                    });
+                     $bot->on('close', function ($event) {
+                       $this->start();
+                    });
+                });
+            },
+            function ($reason) {
+            //other errors, bot startup, authentication
+            }
+        );
+    }
+}
+
+$bot = new Bot(<<<<BOT TOKEN>>>>>);
+$bot->start();
 ````
 ![bot.php](https://web.inmelodies.in/wp-content/uploads/2021/08/Screenshot_2.png)
 
