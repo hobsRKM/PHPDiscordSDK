@@ -351,7 +351,7 @@ PHPDiscordSDKFactory::getInstance()
 
 ````
 ####  Documentation
-###**[Complete Docs of PHPDiscordSDK](https://phpdiscordsdk.gitbook.io/)**
+### **[Complete Docs of PHPDiscordSDK](https://phpdiscordsdk.gitbook.io/)**
 
 ### Web Panel
 ### **[discordapidemo.com](https://github.com/hobsRKM/DiscordAPIWeb)**
