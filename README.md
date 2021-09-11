@@ -182,7 +182,8 @@ The following APIs cannot be called outside of Listener
 > Ex: Send message requires Send Message Perms on a channel
 >
 > For more information on specific permission, check the response body on each APIs.
-
+####  API Demo with Web Panel Integration
+**[discordapidemo.com](https://discordapidemo.com/)**
 ### SendMessage
 
 ````php
