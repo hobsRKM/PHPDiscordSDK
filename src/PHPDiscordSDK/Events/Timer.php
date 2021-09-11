@@ -5,6 +5,7 @@ namespace HobsRkm\SDK\PHPDiscordSDK\Events;
 use HobsRkm\SDK\PHPDiscordSDK\Config\Config;
 use HobsRkm\SDK\PHPDiscordSDK\Constants\Constants;
 use HobsRkm\SDK\PHPDiscordSDK\Utils\Console;
+use Ratchet\RFC6455\Messaging\Frame;
 use React\EventLoop\Loop;
 
 class Timer {
@@ -21,6 +22,10 @@ class Timer {
      * @var null
      */
     public static $_timer = null;
+    /**
+     * @var null
+     */
+    public static $_ping_timer = null;
     /**
      * @var object
      */
@@ -47,9 +52,15 @@ class Timer {
      */
     public function startHeartBeat($socketState)
     {
-        $this->_socketState = $socketState;
-        self::$_timer= Loop::addPeriodicTimer( $this->_constants->LOOP_TIMER, function () {
-            $this->_socketState->send(json_encode($this->_config->getGateWayHeartBeatBody()));
+        self::$_ping_timer =  Loop::addPeriodicTimer($this->_constants->OP_PING, function () use ($socketState) {
+            try {
+                $socketState->send(new Frame('', true, Frame::OP_PING));
+            } catch(\Exception $e ){
+                //TODO
+            }
+        });
+        self::$_timer= Loop::addPeriodicTimer( $this->_constants->LOOP_TIMER, function () use ($socketState) {
+            $socketState->send(json_encode($this->_config->getGateWayHeartBeatBody()));
             $this->networkPing();
         });
 
@@ -84,6 +95,7 @@ class Timer {
      */
     public function cancelTimer() {
         Loop::cancelTimer(self::$_timer);
+        Loop::cancelTimer(self::$_ping_timer);
         $this->_config->clearToken();
     }
 }

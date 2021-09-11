@@ -27,6 +27,7 @@ class Constants
             'BROWSER' => 'disco',
             'DEVICE' => 'disco',
             'H_CODE' => 11,
+            'OP_PING' => 5,
             "errors" => (object)array(
                 "TOKEN_EMPTY" => "BOT TOKEN CANNOT BE EMPTY ",
                 "DISCORD_ERROR" => "Discord Server Error! ",
@@ -42,6 +43,7 @@ class Constants
             "SOCKET_DC_CODE" => 1001,
             "SOCKET_DC_SESSION_CODE" => 1000,
             "SOCKET_AUTH_ERROR" => 4004,
+            "SOCKET_ERROR" => 1006,
             "GUILD_CREATE" => "GUILD_CREATE",
             "PRESENCE_UPDATE" => "PRESENCE_UPDATE",
             "SINCE" => 91879201,
@@ -62,7 +64,10 @@ class Constants
                 "RECONNECT" => 6,
                 "GUILD_MEMBERS" => 7,
                 "INVALID_SESSION" => 8,
-                "HELLO" => 9
+                "HELLO" => 9,
+                "GATEWAY" => 10,
+                "RECONNECT"=> 6,
+                "REQUEST_RECONNECT" => 7
             ),
             "PERMISSIONS" => array(
                 "CREATE_INSTANT_INVITE" => 0,

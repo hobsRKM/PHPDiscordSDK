@@ -100,6 +100,12 @@ class Socket
     private function socketMessageEventReceiver()
     {
         self::$_socketState->on('message', function ($msg) {
+            $gatewayData = json_decode($msg, true);
+            //if requesting for re-connect, force close the connection and ask for client to reconnect
+            if($gatewayData['op']==$this->_constants->OP_CODES->REQUEST_RECONNECT){
+                self::$_socketState->close();
+            }
+
             if (!$this->_timer->isTimerSet()) {
                 $this->_timer->startHeartBeat(self::$_socketState);
             }
@@ -117,25 +123,21 @@ class Socket
      */
     private function socketCloseEventReceiver()
     {
+        //if any other close connection codes from Discord except auth error, ask client to re-authenticate
+        //Sometimes Discord closes the gateway abnormally, re-auth is a must
         self::$_socketState->on('close', function ($code = null, $reason = null) {
             $this->_connectionError = array(
                 "code" => $code,
                 "reason" => $reason
             );
+            $this->_timer->cancelTimer();
             if($code==$this->_constants->SOCKET_AUTH_ERROR){
                 Console::printMessage($reason);
                 $this->_timer->cancelTimer();
                 die();
             }
-            //re connect try
-            if ($code == $this->_constants->SOCKET_DC_CODE || $code == $this->_constants->SOCKET_DC_SESSION_CODE) {
-                $this->connectWS()->then(function () {
-                    $this->authenticateBot($this->_config->getGateWayBody());
-                }, function (Throwable $reason) {
-                    Console::printMessage($reason->getMessage());
-                    $this->_timer->cancelTimer();
-                });
-            }
+            //if abnormally closed with 1006, gateway will still be open
+            self::$_socketState->close();
         });
     }
 
@@ -159,4 +161,5 @@ class Socket
     {
         self::$_socketState->send(json_encode($data));
     }
+
 }
