@@ -55,9 +55,9 @@ use \HobsRkm\SDK\PHPDiscordSDK\PHPDiscordSDKFactory;
 
 class Bot {
 
-    public function start($token) {
+    public function start() {
         PHPDiscordSDKFactory::getInstance()
-            ->botConnect($token)
+            ->botConnect(<<<<BOT TOKEN>>>>>)
             ->then(
                 function ($bot) {
                     $bot->on('message', function ($event) {
@@ -81,7 +81,7 @@ class Bot {
     }
 }
 
-$bot = new Bot(<<<<BOT TOKEN>>>>>);
+$bot = new Bot();
 $bot->start();
 ````
 ![bot.php](https://web.inmelodies.in/wp-content/uploads/2021/08/Screenshot_2.png)
