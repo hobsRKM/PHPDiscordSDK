@@ -19,6 +19,9 @@ A DiscordSDK  to build Discord Bots using PHP, with Web Panel.
 ####  Documentation
 **[Complete Docs of PHPDiscordSDK](https://phpdiscordsdk.gitbook.io/)**
 
+####  API Demo with Web Panel Integration
+**[discordapidemo.com](https://discordapidemo.com/)**
+
 ### Installation
 
 - Requires **PHP >=7.0**
