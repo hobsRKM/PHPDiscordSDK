@@ -36,7 +36,7 @@ composer require phpdiscordsdk/phpdiscordsdk
 >
 > If you want to integerate into a framework and communicate with bot  you can implement something like  Web Panel
 >
->  See Example  [(Web Panel)](Web_Panel) (Supports both Send and Recieve)
+>  See Example  [(Web Panel)](https://github.com/hobsRKM/DiscordAPIWeb) (Supports both Send and Recieve)
 
 **Start  the bot**
 ###  ```` $ php bot.php ````
@@ -351,10 +351,10 @@ PHPDiscordSDKFactory::getInstance()
 
 ````
 ####  Documentation
-**[Complete Docs of PHPDiscordSDK](https://phpdiscordsdk.gitbook.io/)**
+###**[Complete Docs of PHPDiscordSDK](https://phpdiscordsdk.gitbook.io/)**
 
 ### Web Panel
-Coming Soon - Under Development
+### **[discordapidemo.com](https://github.com/hobsRKM/DiscordAPIWeb)**
 
 > Project is Open for contributions , please feel free to fork
 
