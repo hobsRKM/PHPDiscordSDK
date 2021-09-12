@@ -102,7 +102,9 @@ class Socket
         self::$_socketState->on('message', function ($msg) {
             $gatewayData = json_decode($msg, true);
             //if requesting for re-connect, force close the connection and ask for client to reconnect
-            if($gatewayData['op']==$this->_constants->OP_CODES->REQUEST_RECONNECT){
+            if($gatewayData['op']==$this->_constants->OP_CODES->REQUEST_RECONNECT ||
+                $gatewayData['op']==$this->_constants->OP_CODES->INVALID_SESSION
+            ){
                 self::$_socketState->close();
             }
 

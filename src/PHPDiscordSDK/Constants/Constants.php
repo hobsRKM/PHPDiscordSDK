@@ -60,13 +60,10 @@ class Constants
                 "HEARTBEAT" => 1,
                 "PRESENCE" => 3,
                 "VOICE_STATE" => 4,
-                "RESUME" => 5,
-                "RECONNECT" => 6,
-                "GUILD_MEMBERS" => 7,
-                "INVALID_SESSION" => 8,
-                "HELLO" => 9,
+                "RESUME" => 6,
+                "GUILD_MEMBERS" => 8,
+                "INVALID_SESSION" => 9,
                 "GATEWAY" => 10,
-                "RECONNECT"=> 6,
                 "REQUEST_RECONNECT" => 7
             ),
             "PERMISSIONS" => array(

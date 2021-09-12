@@ -81,7 +81,7 @@ class Timer {
      * Date: 8/21/2021
      */
     private function networkPing() {
-        if(!@fsockopen('www.discord.com', 80))
+        if(!@fsockopen('www.discord.com', 80) || !@fsockopen('www.google.com', 80))
         {
             Console::printMessage($this->_constants->errors->NETWORK_TIMEOUT);
             $this->cancelTimer();
@@ -96,6 +96,8 @@ class Timer {
     public function cancelTimer() {
         Loop::cancelTimer(self::$_timer);
         Loop::cancelTimer(self::$_ping_timer);
+        self::$_timer = null;
+        self::$_ping_timer = null;
         $this->_config->clearToken();
     }
 }
