@@ -15,7 +15,7 @@ use React\Http\Browser;
 use React\Promise\Deferred;
 use React\Promise\Promise;
 
-class Messages
+class Reactions
 {
     /**
      * @var Browser
@@ -47,68 +47,41 @@ class Messages
     }
 
     /**
-     * @requires SendMessage Permission on Discord
-     * @param array $data
-     * @return Promise
-     * @author: Yuvaraj Mudaliar ( @HobsRKM )
-     * Date: 8/25/2021
-     */
-    public function sendMessage(array $data): Promise
-    {
-        $this->_deferred = new Deferred();
-        $this->_client->post(
-            $this->_helper->formatURLParams("CHANNEL", $data),
-            $this->_helper->headers(),
-            json_encode($data['body'])
-        )->then(function (ResponseInterface $response) {
-            $this->_deferred->resolve(json_decode((string)$response->getBody()));
-        }, function (Exception $e) {
-            $this->_deferred->reject($e->getMessage());
-
-        });
-        return $this->_deferred->promise();
-    }
-
-    /**
-     * @requires channel id and message id and manage Channel Permissions
-     * @param array $data
-     * @return Promise
-     * @author: Yuvaraj Mudaliar ( @HobsRKM )
-     * Date: 8/27/2021
-     */
-    public function updateChannelMessage(array $data): Promise
-    {
-        $this->_deferred = new Deferred();
-        $this->_client->patch(
-            $this->_helper->formatURLParams("CHANNEL", $data),
-            $this->_helper->headers(),
-            json_encode($data['body'])
-        )->then(function (ResponseInterface $response) {
-            $this->_deferred->resolve(json_decode((string)$response->getBody()));
-        }, function (Exception $e) {
-            $this->_deferred->reject($e->getMessage());
-
-        });
-        return $this->_deferred->promise();
-    }
-
-    /**
      * @param array $data
      * @return Promise
      * @author: Yuvaraj Mudaliar ( @HobsRKM )
      * Date: 9/13/2021
      */
-    public function deleteMessage(array $data): Promise
+    public function addReaction(array $data): Promise
+    {
+        $this->_deferred = new Deferred();
+        $this->_client->put(
+            $this->_helper->formatURLParams("REACTIONS", $data),
+            $this->_helper->headers()
+        )->then(function (ResponseInterface $response) {
+            $this->_deferred->resolve(json_decode((string)$response->getBody()));
+        }, function (Exception $e) {
+            $this->_deferred->reject($e->getMessage());
+        });
+        return $this->_deferred->promise();
+    }
+
+    /**
+     * @param array $data
+     * @return Promise
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 9/14/2021
+     */
+    public function deleteUserReaction(array $data): Promise
     {
         $this->_deferred = new Deferred();
         $this->_client->delete(
-            $this->_helper->formatURLParams("CHANNEL", $data),
-            $this->_helper->headers(),
+            $this->_helper->formatURLParams("REACTIONS", $data),
+            $this->_helper->headers()
         )->then(function (ResponseInterface $response) {
             $this->_deferred->resolve(json_decode((string)$response->getBody()));
         }, function (Exception $e) {
             $this->_deferred->reject($e->getMessage());
-
         });
         return $this->_deferred->promise();
     }
@@ -117,20 +90,18 @@ class Messages
      * @param array $data
      * @return Promise
      * @author: Yuvaraj Mudaliar ( @HobsRKM )
-     * Date: 9/13/2021
+     * Date: 9/14/2021
      */
-    public function deleteMessageBulk(array $data): Promise
+    public function getReactions(array $data): Promise
     {
         $this->_deferred = new Deferred();
-        $this->_client->post(
-            $this->_helper->formatURLParams("CHANNEL", $data),
-            $this->_helper->headers(),
-            json_encode($data['body'])
+        $this->_client->get(
+            $this->_helper->formatURLParams("REACTIONS", $data),
+            $this->_helper->headers()
         )->then(function (ResponseInterface $response) {
             $this->_deferred->resolve(json_decode((string)$response->getBody()));
         }, function (Exception $e) {
             $this->_deferred->reject($e->getMessage());
-
         });
         return $this->_deferred->promise();
     }

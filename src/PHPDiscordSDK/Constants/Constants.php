@@ -119,7 +119,7 @@ class Constants
      * @author: Yuvaraj Mudaliar ( @HobsRKM )
      * Date: 8/21/2021
      */
-    function rest()
+    function rest(): object
     {
         return (object)array(
             "API_EP" => "https://discordapp.com/api",
@@ -129,7 +129,14 @@ class Constants
                 "CHANNEL_MESSAGE_DETAILS" => "/channels/:channel_id:/messages/:message_id:",
                 "CHANNEL_MESSAGE_UPDATE" => "/channels/:channel_id:/messages/:message_id:",
                 "CHANNEL_PERMISSIONS" => "/channels/:channel_id:/permissions/:overwrite_id:",
-                "CHANNEL_INVITES" => "/channels/:channel_id:/invites"
+                "CHANNEL_INVITES" => "/channels/:channel_id:/invites",
+                "CHANNEL_DELETE_MESSAGE" => "/channels/:channel_id:/messages/:message_id:",
+                "CHANNEL_DELETE_MESSAGE_BULK" => "/channels/:channel_id:/messages/bulk-delete",
+            ),
+            "REACTIONS" => (object)array(
+                "CREATE_REACTION" => "/channels/:channel_id:/messages/:message_id:/reactions/:emoji:/@me",
+                "DELETE_REACTION" => "/channels/:channel_id:/messages/:message_id:/reactions/:emoji:/:user_id:",
+                "GET_REACTIONS" => "/channels/:channel_id:/messages/:message_id:/reactions/:emoji:"
             )
         );
     }

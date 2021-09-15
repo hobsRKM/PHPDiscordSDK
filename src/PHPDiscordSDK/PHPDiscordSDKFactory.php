@@ -6,6 +6,7 @@ namespace HobsRkm\SDK\PHPDiscordSDK;
 use HobsRkm\SDK\PHPDiscordSDK\Actions\Channels;
 use HobsRkm\SDK\PHPDiscordSDK\Actions\Messages;
 use HobsRkm\SDK\PHPDiscordSDK\Actions\Presence;
+use HobsRkm\SDK\PHPDiscordSDK\Actions\Reactions;
 
 /**
  * Class PHPDiscordSDKFactory
@@ -37,6 +38,9 @@ class PHPDiscordSDKFactory
                 break;
             case "Channels":
                 $instance =  new Channels();
+                break;
+            case "Reactions":
+                $instance =  new Reactions();
                 break;
             default:
                 $instance =  new PHPDiscordSDKClient();

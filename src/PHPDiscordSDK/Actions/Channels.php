@@ -187,9 +187,55 @@ class Channels
 
     }
 
+    /**
+     * @param $data
+     * @return Promise
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 9/12/2021
+     */
     function getChannelInvites($data): Promise {
         $this->_deferred = new Deferred();
         $this->_client->get(
+            $this->_helper->formatURLParams("CHANNEL", $data),
+            $this->_helper->headers()
+        )->then(function (ResponseInterface $response) {
+            $this->_deferred->resolve(json_decode((string)$response->getBody()));
+        }, function (Exception $e) {
+            $this->_deferred->reject($e->getMessage());
+        });
+        return $this->_deferred->promise();
+    }
+
+    /**
+     * @param $data
+     * @return Promise
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 9/12/2021
+     */
+    function createChannelInvite($data): Promise {
+        $this->_deferred = new Deferred();
+        $this->_client->post(
+            $this->_helper->formatURLParams("CHANNEL", $data),
+            $this->_helper->headers(),
+             json_encode($data['body'])
+        )->then(function (ResponseInterface $response) {
+            $this->_deferred->resolve(json_decode((string)$response->getBody()));
+        }, function (Exception $e) {
+            $this->_deferred->reject($e->getMessage());
+        });
+        return $this->_deferred->promise();
+    }
+
+
+    /**
+     * @param $data
+     * @return Promise
+     * @author: Yuvaraj Mudaliar ( @HobsRKM )
+     * Date: 9/12/2021
+     */
+    function deleteChannelPermission($data): Promise {
+        $this->_deferred = new Deferred();
+        $this->_client->delete(
             $this->_helper->formatURLParams("CHANNEL", $data),
             $this->_helper->headers()
         )->then(function (ResponseInterface $response) {
